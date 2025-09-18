@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search with Filters</title>
+  <style>
+    :root {
+      --clr-bg: #121212;
+      --clr-surface: #1e1e1e;
+      --clr-primary: #f2b823;
+      --clr-secondary: #ff00c1;
+      --clr-text: #e0e0e0;
+      --radius: 12px;
+      --shadow: 0 8px 20px rgba(0,0,0,.4);
+      --transition: .25s ease;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--clr-bg);
+      color: var(--clr-text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ---------- Header ---------- */
+    .header-container {
+      width: 100%;
+      max-width: 800px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .logo img {
+      height: 100px;
+      filter: drop-shadow(0 0 6px var(--clr-primary));
+    }
+    .search-bar {
+      width: 100%;
+      position: relative;
+    }
+    .search-bar input {
+      width: 100%;
+      padding: .85rem 1.25rem;
+      font-size: 1rem;
+      border-radius: var(--radius);
+      border: 1px solid #333;
+      background: var(--clr-surface);
+      color: var(--clr-text);
+      transition: var(--transition);
+    }
+    .search-bar input:focus {
+      outline: none;
+      border-color: var(--clr-primary);
+      box-shadow: 0 0 0 3px rgba(244,231,118,.25);
+    }
+
+    /* ---------- Layout ---------- */
+    .main-wrapper {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      gap: 1.5rem;
+    }
+    @media (max-width: 900px) {
+      .main-wrapper {
+        flex-direction: column;
+      }
+    }
+
+    /* ---------- Sidebar ---------- */
+    .sidebar {
+      flex: 0 0 220px;
+      background: var(--clr-surface);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      box-shadow: var(--shadow);
+      height: fit-content;
+    }
+    .sidebar h2 {
+      margin: 0 0 1rem;
+      font-size: 1.1rem;
+      letter-spacing: .5px;
+      border-bottom: 1px solid #333;
+      padding-bottom: .5rem;
+    }
+    .filter-group {
+      margin-bottom: 1rem;
+    }
+    .filter-group label {
+      display: block;
+      margin-bottom: .35rem;
+      font-size: .875rem;
+      font-weight: 600;
+    }
+    .filter-group select {
+      width: 100%;
+      padding: .55rem .75rem;
+      border-radius: 8px;
+      border: 1px solid #333;
+      background: #2a2a2a;
+      color: var(--clr-text);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .filter-group select:focus {
+      outline: none;
+      border-color: var(--clr-primary);
+    }
+
+    /* ---------- Grid ---------- */
+    .content-grid {
+      flex: 1;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1.25rem;
+    }
+    .card {
+      background: var(--clr-surface);
+      border-radius: var(--radius);
+      padding: 1rem;
+      box-shadow: var(--shadow);
+      text-align: center;
+      transition: transform var(--transition), box-shadow var(--transition);
+      cursor: pointer;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0,0,0,.5);
+    }
+    .card img {
+      width: 96px;
+      height: 96px;
+      object-fit: contain;
+      margin: 0 auto .5rem;
+      display: block;
+    }
+    .card h3 {
+      font-size: .95rem;
+      margin: .25rem 0 .15rem;
+    }
+    .card p {
+      font-size: .8rem;
+      margin: 0;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <div class="header-container">
+    <div class="logo">
+      <img src="https://i.imgur.com/Eb8iCUH.png" alt="Logo">
+    </div>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search...">
+    </div>
+  </div>
+
+  <div class="main-wrapper">
+    <aside class="sidebar">
+      <h2>Filters</h2>
+      <div class="filter-group">
+        <label for="worldTypeFilter">World Type</label>
+        <select id="worldTypeFilter">
+          <option value="all">All</option>
+          <option value="overworld">Overworld</option>
+          <option value="cave">Cave</option>
+          <option value="beach">Beach</option>
+          <option value="nether">Nether</option>
+          <option value="ender">End</option>
+          <option value="abyss">Abyss</option>
+          <option value="aether">Aether</option>
+          <option value="radiocave">Radioactive Cave</option>
+          <option value="koth">KOTH</option>
+          <option value="bossworld">Bossworld</option>
+          <option value="netherbossworld">Nether Bossworld</option>
+          <option value="halloween2024">Halloween 2024</option>
+          <option value="christmas2024">Christmas 2024</option>
+          <option value="easter2025">Easter 2025</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="itemTypeFilter">Item Type</label>
+        <select id="itemTypeFilter">
+          <option value="all">All</option>
+          <option value="material">Material</option>
+          <option value="bossdrop">Boss Drop</option>
+          <option value="armor">Armor</option>
+          <option value="meleeweapon">Melee Weapon</option>
+          <option value="rangedweapon">Ranged Weapon</option>
+          <option value="pickaxe">Pickaxe</option>
+          <option value="tool">Tool</option>
+          <option value="talisman">Talisman</option>
+          <option value="misc">Misc</option>
+          <option value="secret">Secret</option>
+        </select>
+      </div>
+    </aside>
+
+    <main class="content-grid">
+      <div class="grid" id="display-grid"></div>
+    </main>
+  </div>
+
+  <script>
+    // --- DATA ---
+    const materialPrices = [
+      { name: "Blood", tokenRange: [0.25, 0.5], img: "https://minecraft.wiki/images/Red_Dye_JE3_BE3.png?fbdd1", world: "overworld", category: "material" },
+      { name: "Compressed Blood", tokenRange: [16, 32], img: "https://minecraft.wiki/images/Red_Glazed_Terracotta_%28S%29_JE1_BE1.png?a7d9d", world: "overworld", category: "material" },
+      { name: "Oak Wood", tokenRange: [0.00006103515, 0.00006103515], img: "https://minecraft.wiki/images/Oak_Log_%28UD%29_JE8_BE3.png?8a080", world: "overworld", category: "material" },
+      { name: "Compressed Oak Wood", tokenRange: [0.00390625, 0.00390625], img: "https://i.imgur.com/SE98EV9.png", world: "overworld", category: "material" },
+      { name: "Cobblestone", tokenRange: [0.00006103515, 0.00006103515], img: "https://minecraft.wiki/images/Cobblestone_JE5_BE3.png?29624", world: "overworld", category: "material" },
+      { name: "Compressed Stone", tokenRange: [0.00390625, 0.00390625], img: "https://i.imgur.com/qPEshuV.png", world: "overworld", category: "material" },
+      { name: "Coal", tokenRange: [0.00006103515, 0.00006103515], img: "https://minecraft.wiki/images/Coal_JE4_BE3.png?165e9", world: "overworld", category: "material" },
+      { name: "Compressed Coal", tokenRange: [0.00390625, 0.00390625], img: "https://i.imgur.com/EvVe4uB.png", world: "overworld", category: "material" },
+      { name: "Iron Ingot", tokenRange: [0.00006103515, 0.00006103515], img: "https://minecraft.wiki/images/Iron_Ingot_JE3_BE2.png?849cb", world: "overworld", category: "material" },
+      { name: "Compressed Iron", tokenRange: [0.00390625, 0.00390625], img: "https://i.imgur.com/QLAiu4e.png", world: "overworld", category: "material" },
+      { name: "Emerald", tokenRange: [0.00006103515, 0.00006103515], img: "https://minecraft.wiki/images/Emerald_JE3_BE3.png?4c5f3", world: "overworld", category: "material" },
+      { name: "Compressed Emerald", tokenRange: [0.00390625, 0.00390625], img: "https://i.imgur.com/jP5bW94.png", world: "overworld", category: "material" },
+      { name: "Diamond", tokenRange: [0.00006103515, 0.00006103515], img: "https://minecraft.wiki/images/Diamond_JE3_BE3.png?99d00", world: "overworld", category: "material" },
+      { name: "Compressed Diamond", tokenRange: [0.00390625, 0.00390625], img: "https://i.imgur.com/ljUpAEZ.png", world: "overworld", category: "material" },
+      { name: "Obsidian", tokenRange: [0.0001220703, 0.0001220703], img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/9/99/Obsidian_JE3_BE2.png/revision/latest?cb=20200124042057", world: "overworld", category: "material" },
+      { name: "Compressed Obsidian", tokenRange: [0.0078125, 0.0078125], img: "https://i.imgur.com/XtfGRuq.png", world: "overworld", category: "material" },
+      { name: "Block of Amethyst", tokenRange: [0.00006103515, 0.00006103515], img: "https://minecraft.wiki/images/Block_of_Amethyst_JE3_BE1.png?14501", world: "overworld", category: "material" },
+      { name: "Compressed Amethyst", tokenRange: [0.00390625, 0.00390625], img: "https://i.imgur.com/UtEJqGM.png", world: "overworld", category: "material" },
+      { name: "ULTRA Compressed Amethyst", tokenRange: [0.25, 0.25], img: "https://images.minecraft-heads.com/render3d/head/78/783502c96a8b4197dd6b2c9ab28dab8e.webp", world: "overworld", category: "material" },
+      { name: "Venom", tokenRange: [2, 2], img: "", world: "overworld", category: "bossdrop" },
+      { name: "Venom Drop", tokenRange: [0.5, 0.5], img: "https://i.imgur.com/Abo1L84.png", world: "overworld", category: "bossdrop" },
+      { name: "Spider Token", tokenRange: [2, 2], img: "https://minecraft.wiki/images/Gray_Dye_JE2_BE2.png?30e4f", world: "bossworld", category: "bossdrop" },
+      { name: "Shroom Token", tokenRange: [3, 3], img: "https://i.imgur.com/o6BmNuc.png", world: "bossworld", category: "bossdrop" },
+      { name: "Dune Token", tokenRange: [4, 4], img: "https://minecraft.wiki/images/Orange_Dye_JE2_BE2.png?a8b6f", world: "bossworld", category: "bossdrop" },
+      { name: "Slime Token", tokenRange: [8, 8], img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/d/d0/Slimeball_JE2_BE2.png/revision/latest?cb=20190501035326", world: "bossworld", category: "bossdrop" },
+      { name: "Golem Token", tokenRange: [5, 5], img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/0/0f/Lime_Dye_JE2_BE2.png/revision/latest?cb=20190521040441", world: "bossworld", category: "bossdrop" },
+      { name: "Creeper Token", tokenRange: [6, 6], img: "https://minecraft.wiki/images/Gunpowder_JE2_BE2.png?c4145", world: "bossworld", category: "bossdrop" },
+      { name: "Frost Token", tokenRange: [7, 7], img: "https://minecraft.wiki/images/Light_Blue_Dye_JE2_BE2.png?38642", world: "bossworld", category: "bossdrop" },
+      { name: "Water Token", tokenRange: [8, 8], img: "https://minecraft.wiki/images/Heart_of_the_Sea_JE1_BE2.png?edc40", world: "bossworld", category: "bossdrop" },
+      { name: "Piglin Token", tokenRange: [4, 4], img: "https://minecraft.wiki/images/Pink_Dye_JE2_BE2.png?b5b1f", world: "netherbossworld", category: "bossdrop" },
+      { name: "Zombified Token", tokenRange: [8, 8], img: "https://minecraft.wiki/images/Rotten_Flesh_JE3_BE2.png?023cb", world: "netherbossworld", category: "bossdrop" },
+      { name: "Wither Token", tokenRange: [16, 16], img: "https://minecraft.wiki/images/Charcoal_JE4_BE4.png?9a1ec", world: "netherbossworld", category: "bossdrop" },
+      { name: "Brute Token", tokenRange: [8, 8], img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/3/33/Netherite_Scrap_JE2_BE1.png/revision/latest?cb=20200304223056", world: "netherbossworld", category: "bossdrop" },
+      { name: "Blaze Token", tokenRange: [16, 16], img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/7/7c/Blaze_Powder_JE2_BE1.png/revision/latest?cb=20190403182032", world: "netherbossworld", category: "bossdrop" },
+      { name: "Magma Token", tokenRange: [16, 16], img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/0/08/Magma_Cream_JE3_BE2.png/revision/latest?cb=20190501035730", world: "netherbossworld", category: "bossdrop" },
+      { name: "Skeleton Token", tokenRange: [16, 16], img: "https://minecraft.wiki/images/Bone_JE3_BE2.png?b405e", world: "netherbossworld", category: "bossdrop" },
+      { name: "Ghast Token", tokenRange: [48, 48], img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/c/c5/Ghast_Tear_JE2_BE2.png/revision/latest?cb=20190501043739", world: "netherbossworld", category: "bossdrop" },
+      { name: "Koth Token", tokenRange: [128, 192], img: "https://minecraft.wiki/images/Firework_Star_JE1_BE1.png?f2057", world: "koth", category: "material" }
+    ];
+
+    const items = [
+      { name: "Petrified Wood", materials: { "Compressed Oak Wood": 32, "Compressed Stone": 24 }, img: "https://minecraft.wiki/images/Stripped_Jungle_Wood_%28UD%29_JE1_BE1.png?9244c", world: "overworld", category: "material" },
+      { name: "Compressed Petrified Wood", materials: { "Compressed Coal": 32, "Petrified Wood": 1 }, img: "https://minecraft.wiki/images/Stripped_Dark_Oak_Wood_%28UD%29_JE3_BE2.png?ab596", world: "overworld", category: "material" },
+      { name: "Reinforced Compressed Petrified Wood", materials: { "Compressed Iron": 36, "Compressed Petrified Wood": 1 }, img: "https://minecraft.wiki/images/Stripped_Birch_Wood_%28UD%29_JE1_BE1.png?5e5c5", world: "overworld", category: "material" },
+      { name: "Crystalised Reinforced Compressed Petrified Wood", materials: { "Compressed Emerald": 48, "Reinforced Compressed Petrified Wood": 1 }, img: "https://minecraft.wiki/images/Stripped_Warped_Hyphae_%28UD%29_JE1_BE1.png?9abb5", world: "overworld", category: "material" },
+      { name: "Blue Crystalised Reinforced Compressed Petrified Wood", materials: { "Compressed Diamond": 64, "Crystalised Reinforced Compressed Petrified Wood": 1 }, img: "", world: "overworld", category: "material" },
+      { name: "Hardened Blue Crystalised Reinforced Compressed Petrified Wood", materials: { "Compressed Obsidian": 32, "Blue Crystalised Reinforced Compressed Petrified Wood": 1 }, img: "", world: "overworld", category: "material" },
+      { name: "Overworld Fragment", materials: { "ULTRA Compressed Amethyst": 4, "Hardened Blue Crystalised Reinforced Compressed Petrified Wood": 1 }, img: "https://minecraft.wiki/images/Heart_of_the_Sea_JE1_BE2.png?edc40", world: "overworld", category: "material" },
+      { name: "OVERWORLD", materials: { "Venom": 4, "Overworld Fragment": 1 }, img: "https://images.minecraft-heads.com/render3d/head/21/219cd15329483cbde8145079f0967460.webp", world: "overworld", category: "material" },
+      { name: "Fire Launcher", materials: { "Koth Token": 3 }, img: "https://i.imgur.com/sa07UzF.png", world: "koth", category: "rangedweapon" },
+      { name: "Boom Bow", materials: { "Koth Token": 4 }, img: "", world: "koth", category: "rangedweapon" },
+      { name: "Death Axe", materials: { "Koth Token": 12 }, img: "", world: "koth", category: "meleeweapon" },
+      { name: "Strength Potion (03:00)", materials: { "Blood": 1 }, img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/7/75/Water_Bottle_JE2_BE2.png/revision/latest?cb=20191027055423", world: "overworld", category: "misc" },
+      { name: "Strength Potion (10:00)", materials: { "Blood": 2 }, img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/7/75/Water_Bottle_JE2_BE2.png/revision/latest?cb=20191027055423", world: "overworld", category: "misc" },
+      { name: "Strength II Potion (10:00)", materials: { "Blood": 4 }, img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/7/75/Water_Bottle_JE2_BE2.png/revision/latest?cb=20191027055423", world: "overworld", category: "misc" },
+      { name: "Strength III Potion (10:00)", materials: { "Blood": 6 }, img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/7/75/Water_Bottle_JE2_BE2.png/revision/latest?cb=20191027055423", world: "overworld", category: "misc" },
+      { name: "Strength V Potion (03:00)", materials: { "Blood": 7 }, img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/7/75/Water_Bottle_JE2_BE2.png/revision/latest?cb=20191027055423", world: "overworld", category: "misc" },
+      { name: "Strength VI Potion (03:00)", materials: { "Blood": 9 }, img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/7/75/Water_Bottle_JE2_BE2.png/revision/latest?cb=20191027055423", world: "overworld", category: "misc" },
+      { name: "Escape Potion", materials: { "Blood": 2 }, img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/7/75/Water_Bottle_JE2_BE2.png/revision/latest?cb=20191027055423", world: "overworld", category: "misc" },
+      { name: "Potion of Healing", materials: { "Blood": 1 }, img: "https://minecraft.wiki/images/Potion_of_Healing_JE2_BE2.png?d579c", world: "overworld", category: "misc" },
+      { name: "Injecter", materials: { "Blood": 16 }, img: "", world: "overworld", category: "meleeweapon" },
+      { name: "The Injecter", materials: { "Compressed Blood": 1 }, img: "", world: "overworld", category: "meleeweapon" },
+      { name: "Blood Harvester", materials: { "Compressed Blood": 6 }, img: "", world: "overworld", category: "meleeweapon" },
+      { name: "Firework Rocket (Crossbow Projectile)", materials: { "Blood": 3 }, img: "https://minecraft.wiki/images/Firework_Rocket_JE2_BE2.png?fa5d7", world: "overworld", category: "misc" },
+      { name: "Crossbow", materials: { "Blood": 16 }, img: "https://i.imgur.com/WEOkyZ8.png", world: "overworld", category: "rangedweapon" },
+      { name: "Great Crossbow", materials: { "Blood": 48, "Crossbow": 1 }, img: "", world: "overworld", category: "rangedweapon" },
+      { name: "Puller", materials: { "Blood": 12 }, img: "https://i.imgur.com/WEOkyZ8.png", world: "overworld", category: "rangedweapon" },
+      { name: "Grappling Hook T.1", materials: { "Compressed Oak Wood": 9 }, img: "https://i.imgur.com/l2EzDG9.png", world: "overworld", category: "misc" },
+      { name: "Grappling Hook T.2", materials: { "Compressed Stone": 16, "Grappling Hook T.1": 1 }, img: "https://i.imgur.com/l2EzDG9.png", world: "overworld", category: "misc" },
+      { name: "Grappling Hook T.3", materials: { "Compressed Coal": 25, "Grappling Hook T.2": 1 }, img: "https://i.imgur.com/l2EzDG9.png", world: "overworld", category: "misc" },
+      { name: "Grappling Hook T.4", materials: { "Compressed Iron": 36, "Grappling Hook T.3": 1 }, img: "https://i.imgur.com/l2EzDG9.png", world: "overworld", category: "misc" },
+      { name: "Grappling Hook T.5", materials: { "Compressed Emerald": 49, "Grappling Hook T.4": 1 }, img: "https://i.imgur.com/l2EzDG9.png", world: "overworld", category: "misc" },
+      { name: "Grappling Hook", materials: { "Compressed Diamond": 64, "Grappling Hook T.5": 1 }, img: "https://i.imgur.com/l2EzDG9.png", world: "overworld", category: "misc" },
+      { name: "Warped Grappling Hook", materials: { "Skeleton Token": 12, "Grappling Hook": 1 }, img: "https://i.imgur.com/l2EzDG9.png", world: "netherbossworld", category: "misc" },
+      { name: "SPRING GRAPPLE", tokenRange: [640, 896], img: "https://i.imgur.com/l2EzDG9.png", world: "easter2025", category: "misc" },
+      { name: "Shield", materials: { "Compressed Oak Wood": 12, "Compressed Iron": 2 }, img: "https://minecraft.wiki/images/Shield_JE2_BE1.png?4837d", world: "overworld", category: "misc" },
+      { name: "Reinforced Shield", materials: { "Petrified Wood": 4, "Compressed Iron": 16 }, img: "", world: "overworld", category: "misc" },
+      { name: "Totem of Undying", materials: { "Blood": 5, "Compressed Emerald": 2 }, img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/2e/Totem_of_Undying_JE2_BE2.png/revision/latest/thumbnail/width/360/height/360?cb=20200522030253", world: "overworld", category: "misc" },
+      { name: "Wooden Talisman", materials: { "Compressed Oak Wood": 18 }, img: "https://images.minecraft-heads.com/render3d/head/27/273019406196b99f3d6f9689fc5cb713.webp", world: "overworld", category: "talisman" },
+      { name: "Stone Talisman", materials: { "Compressed Stone": 24, "Wooden Talisman": 1 }, img: "https://images.minecraft-heads.com/render3d/head/60/609b8c100bd773b47ee81348835eaef0.webp", world: "overworld", category: "talisman" },
+      { name: "Coal Talisman", materials: { "Compressed Coal": 32, "Stone Talisman": 1 }, img: "https://images.minecraft-heads.com/render3d/head/e3/e3bf77be28d3442c07c5a0a131708bc9.webp", world: "overworld", category: "talisman" },
+      { name: "Iron Talisman", materials: { "Compressed Iron": 36, "Coal Talisman": 1 }, img: "https://images.minecraft-heads.com/render3d/head/58/58c3012dd4174300a838c471cab2c9b2.webp", world: "overworld", category: "talisman" },
+      { name: "Emerald Talisman", materials: { "Compressed Emerald": 48, "Iron Talisman": 1 }, img: "https://images.minecraft-heads.com/render3d/head/55/552cc383de4a0e0bd044f95c91854a70.webp", world: "overworld", category: "talisman" },
+      { name: "Diamond Talisman", materials: { "Compressed Diamond": 64, "Emerald Talisman": 1 }, img: "https://images.minecraft-heads.com/render3d/head/0c/0ccc833f63812557e969cacc98283c0c.webp", world: "overworld", category: "talisman" },
+      { name: "Obsidian Talisman", materials: { "Compressed Obsidian": 36, "Diamond Talisman": 1 }, img: "https://images.minecraft-heads.com/render3d/head/14/1490ea11ec6da1a309e97504a464a45d.webp", world: "overworld", category: "talisman" },
+      { name: "Nemo T1", materials: { "Compressed Oak Wood": 1 }, img: "https://i.imgur.com/28e1EJW.png", world: "overworld", category: "misc" },
+      { name: "Nemo T2", materials: { "Compressed Oak Wood": 2, "Nemo T1": 1 }, img: "https://i.imgur.com/28e1EJW.png", world: "overworld", category: "misc" },
+      { name: "Nemo T3", materials: { "Compressed Oak Wood": 4, "Nemo T2": 1 }, img: "https://i.imgur.com/28e1EJW.png", world: "overworld", category: "misc" },
+      { name: "Nemo T4", materials: { "Compressed Oak Wood": 8, "Nemo T3": 1 }, img: "https://i.imgur.com/28e1EJW.png", world: "overworld", category: "misc" },
+      { name: "Nemo T5", materials: { "Compressed Oak Wood": 16, "Nemo T4": 1 }, img: "https://i.imgur.com/28e1EJW.png", world: "overworld", category: "misc" },
+      { name: "Nemo", materials: { "Compressed Oak Wood": 32, "Nemo T5": 1 }, img: "https://i.imgur.com/28e1EJW.png", world: "overworld", category: "misc" },
+      { name: "Nemo (KOTH)", materials: { "Koth Token": 1, "Nemo": 1 }, img: "https://i.imgur.com/28e1EJW.png", world: "koth", category: "misc" },
+      { name: "Bundle", materials: { "ULTRA Compressed Amethyst": 2 }, img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/d/d4/Bundle_JE2.png/revision/latest?cb=20201111180923", world: "overworld", category: "misc" },
+      { name: "Gigachad", materials: { "Compressed Blood": 9, "Compressed Obsidian": 48 }, img: "https://images.minecraft-heads.com/render3d/head/4f/4fc71108f322aa2545d0b5de289783b8.webp", world: "overworld", category: "armor" },
+      { name: "Gigachad Fist", materials: { "Compressed Blood": 9, "Compressed Obsidian": 48 }, img: "", world: "overworld", category: "meleeweapon" },
+      { name: "Gigachad Potion", materials: { "Compressed Blood": 6, "Compressed Obsidian": 32 }, img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/7/75/Water_Bottle_JE2_BE2.png/revision/latest?cb=20191027055423", world: "overworld", category: "misc" },
+      { name: "OverWorld Crate Key", tokenRange: [5, 5], img: "https://i.imgur.com/d4CbxmE.png", world: "overworld", category: "misc" },
+      { name: "Cave Crate Key", materials: { "OverWorld Crate Key": 2 }, img: "https://i.imgur.com/d4CbxmE.png", world: "overworld", category: "misc" },
+      { name: "Frost Crate Key", materials: { "Cave Crate Key": 2 }, img: "https://i.imgur.com/d4CbxmE.png", world: "overworld", category: "misc" },
+      { name: "Nether Crate Key", materials: { "Frost Crate Key": 2 }, img: "https://i.imgur.com/d4CbxmE.png", world: "overworld", category: "misc" },
+      { name: "End Crate Key", materials: { "Nether Crate Key": 2 }, img: "https://i.imgur.com/d4CbxmE.png", world: "overworld", category: "misc" },
+      { name: "Abyss Crate Key", materials: { "End Crate Key": 2 }, img: "https://i.imgur.com/d4CbxmE.png", world: "overworld", category: "misc" },
+      { name: "Aether Crate Key", materials: { "Abyss Crate Key": 2 }, img: "https://i.imgur.com/d4CbxmE.png", world: "overworld", category: "misc" },
+      { name: "Radioactive Crate Key", materials: { "Aether Crate Key": 2 }, img: "https://i.imgur.com/d4CbxmE.png", world: "overworld", category: "misc" },
+      { name: "Arrow", materials: { "Compressed Oak Wood": 1 }, img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/25/Arrow_%28item%29_JE1_BE1.png/revision/latest?cb=20190403171057", world: "overworld", category: "rangedweapon" },
+      { name: "Wooden Bow", materials: { "Compressed Oak Wood": 5 }, img: "", world: "overworld", category: "rangedweapon" },
+      { name: "Stone Bow", materials: { "Compressed Stone": 6, "Wooden Bow": 1 }, img: "", world: "overworld", category: "rangedweapon" },
+      { name: "Coal Bow", materials: { "Compressed Coal": 8, "Stone Bow": 1 }, img: "", world: "overworld", category: "rangedweapon" },
+      { name: "Iron Bow", materials: { "Compressed Iron": 9, "Coal Bow": 1 }, img: "", world: "overworld", category: "rangedweapon" },
+      { name: "Emerald Bow", materials: { "Compressed Emerald": 12, "Iron Bow": 1 }, img: "", world: "overworld", category: "rangedweapon" },
+      { name: "Diamond Bow", materials: { "Compressed Diamond": 16, "Emerald Bow": 1 }, img: "", world: "overworld", category: "rangedweapon" },
+      { name: "Obsidian Bow", materials: { "Compressed Obsidian": 9, "Diamond Bow": 1 }, img: "", world: "overworld", category: "rangedweapon" },
+      { name: "Poison Bow", materials: { "Venom": 1, "Obsidian Bow": 1 }, img: "", world: "overworld", category: "rangedweapon" },
+      { name: "OVERWORLD Bow", materials: { "OVERWORLD": 1, "Poison Bow": 1 }, img: "", world: "overworld", category: "rangedweapon" },
+      { name: "Bread", materials: { "Compressed Oak Wood": 0.03125 }, img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/4/44/Bread_JE3_BE3.png/revision/latest?cb=20190503044317", world: "overworld", category: "misc" },
+      { name: "Golden Carrot", materials: { "Compressed Oak Wood": 0.1875 }, img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/a/aa/Golden_Carrot_JE4_BE2.png/revision/latest/thumbnail/width/360/height/360?cb=20200430031437", world: "overworld", category: "misc" },
+      { name: "Golden Apple", materials: { "Compressed Oak Wood": 3 }, img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/5/54/Golden_Apple_JE2_BE2.png/revision/latest/thumbnail/width/360/height/360?cb=20200521041809", world: "overworld", category: "misc" },
+      { name: "Enchanted Golden Apple", materials: { "Compressed Oak Wood": 64 }, img: "https://i.imgur.com/v3BLRFc.png", world: "overworld", category: "misc" },
+      { name: "Firework Rocket (Duration 1)", materials: { "Compressed Obsidian": 0.125 }, img: "https://minecraft.wiki/images/Firework_Rocket_JE2_BE2.png?fa5d7", world: "overworld", category: "misc" },
+      { name: "Firework Rocket (Duration 2)", materials: { "Compressed Obsidian": 0.1875 }, img: "https://minecraft.wiki/images/Firework_Rocket_JE2_BE2.png?fa5d7", world: "overworld", category: "misc" },
+      { name: "Firework Rocket (Duration 3)", materials: { "Compressed Obsidian": 0.25 }, img: "https://minecraft.wiki/images/Firework_Rocket_JE2_BE2.png?fa5d7", world: "overworld", category: "misc" },
+      { name: "Firework Rocket (Duration 4)", materials: { "Compressed Obsidian": 0.3125 }, img: "https://minecraft.wiki/images/Firework_Rocket_JE2_BE2.png?fa5d7", world: "overworld", category: "misc" },
+      { name: "Firework Rocket (Duration 5)", materials: { "Compressed Obsidian": 0.375 }, img: "https://minecraft.wiki/images/Firework_Rocket_JE2_BE2.png?fa5d7", world: "overworld", category: "misc" },
+      { name: "Elytra", materials: { "Compressed Obsidian": 32 }, img: "https://static.wikia.nocookie.net/minecraft/images/6/66/ElytraNew.png/revision/latest?cb=20190908174241", world: "overworld", category: "armor" },
+      { name: "Allay Wings", materials: { "ULTRA Compressed Amethyst": 4, "Elytra": 1 }, img: "https://i.imgur.com/izfP938.png", world: "overworld", category: "armor" },
+      { name: "Frozen Amethyst", materials: { "OVERWORLD": 104 }, img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/3/34/Conduit_JE1_BE1.png/revision/latest?cb=20200307232204", world: "overworld", category: "secret" },
+      { name: "Wooden Axe", materials: { "Oak Wood": 4 }, img: "https://minecraft.wiki/images/Wooden_Axe_JE2_BE2.png?ff0b9", world: "overworld", category: "tool" },
+      { name: "Wooden Axe Tier 2", materials: { "Oak Wood": 16, "Wooden Axe": 1 }, img: "https://i.imgur.com/XuNKpYr.png", world: "overworld", category: "tool" },
+      { name: "Stone Axe Tier 1", materials: { "Oak Wood": 32, "Wooden Axe Tier 2": 1 }, img: "https://i.imgur.com/5qQIZI5.png", world: "overworld", category: "tool" },
+      { name: "Iron Axe", materials: { "Compressed Oak Wood": 1, "Stone Axe Tier 1": 1 }, img: "https://i.imgur.com/X9yJzjL.png", world: "overworld", category: "tool" },
+      { name: "Diamond Axe", materials: { "Compressed Oak Wood": 2, "Iron Axe": 1 }, img: "https://i.imgur.com/AfzhMi4.png", world: "overworld", category: "tool" },
+      { name: "Golden Axe", materials: { "Compressed Oak Wood": 8, "Diamond Axe": 1 }, img: "https://i.imgur.com/aKiINF2.png", world: "overworld", category: "tool" },
+      { name: "Netherite Axe", materials: { "Compressed Oak Wood": 16, "Gold Axe": 1 }, img: "https://i.imgur.com/I9Z2HHR.png", world: "overworld", category: "tool" },
+      { name: "Wooden Pickaxe", materials: { "Compressed Oak Wood": 1 }, img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/0/0b/Wooden_Pickaxe_JE2_BE2.png/revision/latest?cb=20200217231203", world: "overworld", category: "pickaxe" },
+      { name: "Wooden Sword Tier 1", materials: { "Oak Wood": 16 }, img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/d/d5/Wooden_Sword_JE2_BE2.png/revision/latest/scale-to-width/360?cb=20200217235747", world: "overworld", category: "meleeweapon" },
+      { name: "Wooden Sword Tier 2", materials: { "Compressed Oak Wood": 1, "Wooden Sword Tier 1": 1 }, img: "", world: "overworld", category: "meleeweapon" },
+      { name: "Wooden Armor Tier 1", materials: { "Oak Wood": 32 }, img: "https://static.planetminecraft.com/files/image/minecraft/data-pack/2021/400/14990326-pack_l.webp", world: "overworld", category: "armor" },
+      { name: "Wooden Armor Tier 2", materials: { "Compressed Oak Wood": 1, "Wooden Armor Tier 1": 1 }, img: "https://static.planetminecraft.com/files/image/minecraft/data-pack/2021/400/14990326-pack_l.webp", world: "overworld", category: "armor" },
+      { name: "Wood Auto-Compressor", materials: { "Compressed Oak Wood": 8 }, img: "https://minecraft.wiki/images/Stripped_Oak_Log_%28UD%29_JE2_BE2.png?2f50d", world: "overworld", category: "misc" },
+      { name: "Stone Pick T.1", materials: { "Cobblestone": 32, "Wooden Pickaxe": 1 }, img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/c/c4/Stone_Pickaxe_JE2_BE2.png/revision/latest/scale-to-width/360?cb=20200217234007", world: "overworld", category: "pickaxe" },
+      { name: "Stone Pick T.2", materials: { "Compressed Stone": 1, "Stone Pick T.1": 1 }, img: "", world: "overworld", category: "pickaxe" },
+      { name: "Stone Pick T.3", materials: { "Compressed Stone": 2, "Stone Pick T.2": 1 }, img: "", world: "overworld", category: "pickaxe" },
+      { name: "Stone Sword T.1", materials: { "Compressed Stone": 1, "Wooden Sword Tier 2": 1 }, img: "", world: "overworld", category: "meleeweapon" },
+      { name: "Stone Sword T.2", materials: { "Compressed Stone": 2, "Stone Sword T.1": 1 }, img: "", world: "overworld", category: "meleeweapon" },
+      { name: "Stone Sword T.3", materials: { "Compressed Stone": 4, "Stone Sword T.2": 1 }, img: "", world: "overworld", category: "meleeweapon" },
+      { name: "Stone Armor T.1", materials: { "Compressed Stone": 3, "Wooden Armor Tier 2": 1 }, img: "https://wiki.hypixel.net/images/8/8c/Minecraft_items_chainmail_chestplate.png", world: "overworld", category: "armor" },
+      { name: "Stone Armor T.2", materials: { "Compressed Stone": 5, "Stone Armor T.1": 1 }, img: "https://wiki.hypixel.net/images/8/8c/Minecraft_items_chainmail_chestplate.png", world: "overworld", category: "armor" },
+      { name: "Stone Auto-Compressor", materials: { "Compressed Stone": 4, "Wood Auto-Compressor": 1 }, img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/6/64/Stone_JE5_move.png/revision/latest?cb=20200317041613", world: "overworld", category: "misc" }
+
+
+      //{ name: "Ultimate Wand", materials: { "Crystal Wand": 2, "Blood Harvester": 1 }, img: "", world: "overworld", category: "weapon" }, // item + material cost
+      //{ name: "Magic Stone", tokenRange: [150, 150], img: "", world: "overworld", category: "item" } // set value
+    ];
+
+    const conversions = [
+      { rank: "VIP", usdValue: 6.33, tokenRange: [1856, 2944] },
+      { rank: "MVP", usdValue: 14.03, tokenRange: [4096, 6528] },
+      { rank: "Legend", usdValue: 21.18, tokenRange: [6144, 9856] },
+      { rank: "Overlord", usdValue: 30.25, tokenRange: [8832, 14080] },
+      { rank: "Rizzler", usdValue: 40.15, tokenRange: [11712, 18688] },
+      { rank: "RizzMiner", usdValue: 53.08, tokenRange: [15424, 24704] },
+      { rank: "Custom", usdValue: 73.15, tokenRange: [21312, 34048] }
+    ];
+
+    // --- DOM ELEMENTS ---
+    const searchInput = document.getElementById("searchInput");
+    const worldFilter = document.getElementById("worldTypeFilter");
+    const itemFilter = document.getElementById("itemTypeFilter");
+    const grid = document.getElementById("display-grid");
+
+    // --- CALCULATIONS ---
+    function calculateAverageRatio(conversions) {
+      let ratios = conversions.map(c => {
+        let avgTokens = (c.tokenRange[0] + c.tokenRange[1]) / 2;
+        return avgTokens / c.usdValue;
+      });
+      let sum = ratios.reduce((a, b) => a + b, 0);
+      return sum / ratios.length;
+    }
+    const avgTokenUsdRatio = calculateAverageRatio(conversions);
+
+    function calculateItemValue(item, materials, allItems) {
+      if (item.tokenRange) return item.tokenRange;
+
+      let minValue = 0;
+      let maxValue = 0;
+
+      for (let mat in item.materials) {
+        const quantity = item.materials[mat];
+        const material = materials.find(m => m.name === mat);
+        if (material) {
+          minValue += material.tokenRange[0] * quantity;
+          maxValue += material.tokenRange[1] * quantity;
+        } else {
+          const subItem = allItems.find(i => i.name === mat);
+          if (subItem) {
+            const [subMin, subMax] = calculateItemValue(subItem, materials, allItems);
+            minValue += subMin * quantity;
+            maxValue += subMax * quantity;
+          }
+        }
+      }
+      return [minValue, maxValue];
+    }
+
+    // --- RENDER FUNCTION ---
+    function renderGrid() {
+      const searchTerm = searchInput.value.toLowerCase();
+      const worldType = worldFilter.value;
+      const itemType = itemFilter.value;
+
+      grid.innerHTML = "";
+      const combined = [
+        ...materialPrices.map(m => ({ ...m, type: "material" })),
+        ...items.map(i => ({ ...i, type: "item" }))
+      ].sort((a, b) => a.name.localeCompare(b.name));
+
+      const filtered = combined
+        .filter(entry => entry.name.toLowerCase().includes(searchTerm))
+        .filter(entry => worldType === 'all' || entry.world === worldType)
+        .filter(entry => {
+            if (itemType === 'all') return true;
+            // The `entry.type` distinguishes materials from craftable items
+            // The `entry.category` is our new, more specific type
+            return entry.category === itemType;
+        });
+
+      filtered.forEach(entry => {
+          let min, max;
+          if (entry.type === "material") {
+            [min, max] = entry.tokenRange;
+          } else {
+            [min, max] = calculateItemValue(entry, materialPrices, items);
+          }
+
+          const minUsd = (min / avgTokenUsdRatio).toFixed(2);
+          const maxUsd = (max / avgTokenUsdRatio).toFixed(2);
+
+          const card = document.createElement("div");
+          card.className = "card";
+          card.innerHTML = `
+            <img src="${entry.img || 'https://via.placeholder.com/75'}" alt="${entry.name}">
+            <h3>${entry.name}</h3>
+            <p>${min === max ? `${min.toLocaleString()} tokens` : `${min.toLocaleString()} - ${max.toLocaleString()} tokens`}</p>
+            <p>${min === max ? `$${minUsd}` : `$${minUsd} - $${maxUsd}`}</p>
+          `;
+          grid.appendChild(card);
+        });
+    }
+
+    // --- EVENT LISTENERS ---
+    searchInput.addEventListener("input", renderGrid);
+    worldFilter.addEventListener("change", renderGrid);
+    itemFilter.addEventListener("change", renderGrid);
+    
+    // Initial render on page load
+    renderGrid();
+  </script>
+</body>
+</html>
