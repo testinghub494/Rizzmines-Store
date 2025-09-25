@@ -256,7 +256,30 @@
       { name: "Magma Token", tokenRange: [16, 16], img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/0/08/Magma_Cream_JE3_BE2.png/revision/latest?cb=20190501035730", world: "netherbossworld", category: "bossdrop" },
       { name: "Skeleton Token", tokenRange: [16, 16], img: "https://minecraft.wiki/images/Bone_JE3_BE2.png?b405e", world: "netherbossworld", category: "bossdrop" },
       { name: "Ghast Token", tokenRange: [48, 48], img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/c/c5/Ghast_Tear_JE2_BE2.png/revision/latest?cb=20190501043739", world: "netherbossworld", category: "bossdrop" },
-      { name: "Koth Token", tokenRange: [128, 192], img: "https://minecraft.wiki/images/Firework_Star_JE1_BE1.png?f2057", world: "koth", category: "material" }
+      { name: "Koth Token", tokenRange: [128, 192], img: "https://minecraft.wiki/images/Firework_Star_JE1_BE1.png?f2057", world: "koth", category: "material" },
+      { name: "Cobbled Deepslate", tokenRange: [0.00004077148, 0.00004882812], img: "", world: "cave", category: "material" },
+      { name: "Compressed Deepslate", tokenRange: [0.002609375, 0.003125], img: "", world: "cave", category: "material" },
+      { name: "ULTRA Compressed Deepslate", tokenRange: [0.167, 0.2], img: "", world: "cave", category: "material" },
+      { name: "Coal (cave)", tokenRange: [0.00004077148, 0.00004882812], img: "", world: "cave", category: "material" },
+      { name: "Compressed Coal (cave)", tokenRange: [0.002609375, 0.003125], img: "", world: "cave", category: "material" },
+      { name: "SUPER Compressed Coal", tokenRange: [0.167, 0.2], img: "", world: "cave", category: "material" },
+      { name: "Raw Gold", tokenRange: [0.00003567504, 0.0000427246], img: "", world: "cave", category: "material" },
+      { name: "Gold Ingot", materials: { "Raw Gold": 8, "Coal (cave)": 1 }, img: "", world: "cave", category: "material" },
+      { name: "Compressed Gold", tokenRange: [0.002609375, 0.003125], img: "", world: "cave", category: "material" },
+      { name: "SUPER Compressed Gold", tokenRange: [0.167, 0.2], img: "", world: "cave", category: "material" },
+      { name: "Emerald (cave)", tokenRange: [0.00004077148, 0.00004882812], img: "", world: "cave", category: "material" },
+      { name: "Compressed Emerald (cave)", tokenRange: [0.002609375, 0.003125], img: "", world: "cave", category: "material" },
+      { name: "SUPER Compressed Emerald", tokenRange: [0.167, 0.2], img: "", world: "cave", category: "material" },
+      { name: "Diamond (cave)", tokenRange: [0.00004077148, 0.00004882812], img: "", world: "cave", category: "material" },
+      { name: "Compressed Diamond (cave)", tokenRange: [0.002609375, 0.003125], img: "", world: "cave", category: "material" },
+      { name: "ULTRA Compressed Diamond", tokenRange: [0.167, 0.2], img: "", world: "cave", category: "material" },
+      { name: "Sculk", tokenRange: [0.00006103515, 0.0000805664], img: "", world: "cave", category: "material" },
+      { name: "Compressed Sculk", tokenRange: [0.00390625, 0.00515625], img: "", world: "cave", category: "material" },
+      { name: "ULTRA Compressed Sculk", tokenRange: [0.25, 0.33], img: "", world: "cave", category: "material" },
+      { name: "Sculk Catalyst", tokenRange: [0.00006103515, 0.0000805664], img: "", world: "cave", category: "material" },
+      { name: "Compressed Sculk Catalyst", tokenRange: [0.00390625, 0.00515625], img: "", world: "cave", category: "material" },
+      { name: "ULTRA Compressed Sculk Catalyst", tokenRange: [0.25, 0.33], img: "", world: "cave", category: "material" },
+      { name: "Souls", tokenRange: [4, 8], img: "", world: "cave", category: "bossdrop" }
     ];
 
     const items = [
@@ -421,7 +444,15 @@
       { name: "Overworld Sword", materials: { "OVERWORLD": 1, "Poisonous Sword T.3": 1 }, img: "", world: "overworld", category: "meleeweapon" },
       { name: "Poison Armor T.1", materials: { "Venom": 1, "Obsidian Armor T.2": 1 }, img: "", world: "overworld", category: "armor" },
       { name: "Poison Armor T.2", materials: { "Venom": 2, "Poison Armor T.1": 1 }, img: "", world: "overworld", category: "armor" },
-      { name: "OVERWORLD Armor", materials: { "OVERWORLD": 1, "Poison Armor T.2": 1 }, img: "", world: "overworld", category: "armor" }
+      { name: "OVERWORLD Armor", materials: { "OVERWORLD": 1, "Poison Armor T.2": 1 }, img: "", world: "overworld", category: "armor" },
+      { name: "Deepslate Coal", materials: { "ULTRA Compressed Deepslate": 4, "SUPER Compressed Coal": 6 }, img: "", world: "cave", category: "material" },
+      { name: "Gilded Deepslate Coal", materials: { "SUPER Compressed Gold": 8, "Deepslate Coal": 1 }, img: "", world: "cave", category: "material" },
+      { name: "Crystalised Gilded Deepslate Coal", materials: { "SUPER Compressed Emerald": 12, "Gilded Deepslate Coal": 1 }, img: "", world: "cave", category: "material" },
+      { name: "Blue Crystalised Gilded Deepslate Coal", materials: { "ULTRA Compressed Diamond": 16, "Crystalised Gilded Deepslate Coal": 1 }, img: "", world: "cave", category: "material" },
+      { name: "Sculkified Blue Crystalised Gilded Deepslate Coal", materials: { "ULTRA Compressed Sculk": 9, "Blue Crystalised Gilded Deepslate Coal": 1 }, img: "", world: "cave", category: "material" },
+      { name: "Hardened Sculkified Blue Crystalised Gilded Deepslate Coal", materials: { "ULTRA Compressed Sculk Catalyst": 8, "Sculkified Blue Crystalised Gilded Deepslate Coal": 1 }, img: "", world: "cave", category: "material" },
+      { name: "Cave", materials: { "Souls": 4, "Hardened Sculkified Blue Crystalised Gilded Deepslate Coal": 1 }, img: "https://images.minecraft-heads.com/render3d/head/17/17eb1fb11de45b3b9827a6f77caf0c94.webp", world: "cave", category: "material" },
+      { name: "Warden Summoner", materials: { "Cave": 96 }, img: "https://minecraft.wiki/images/Calibrated_Sculk_Sensor_JE2.gif?cfb26", world: "cave", category: "secret" }
 
 
       //{ name: "Ultimate Wand", materials: { "Crystal Wand": 2, "Blood Harvester": 1 }, img: "", world: "overworld", category: "weapon" }, // item + material cost
