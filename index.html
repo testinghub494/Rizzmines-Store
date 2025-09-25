@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Search with Filters</title>
   <style>
-    /* yes i did use ai to set up visuals i know very sad */
     :root {
       --clr-bg: #121212;
       --clr-surface: #1e1e1e;
@@ -367,7 +366,62 @@
       { name: "Stone Sword T.3", materials: { "Compressed Stone": 4, "Stone Sword T.2": 1 }, img: "", world: "overworld", category: "meleeweapon" },
       { name: "Stone Armor T.1", materials: { "Compressed Stone": 3, "Wooden Armor Tier 2": 1 }, img: "https://wiki.hypixel.net/images/8/8c/Minecraft_items_chainmail_chestplate.png", world: "overworld", category: "armor" },
       { name: "Stone Armor T.2", materials: { "Compressed Stone": 5, "Stone Armor T.1": 1 }, img: "https://wiki.hypixel.net/images/8/8c/Minecraft_items_chainmail_chestplate.png", world: "overworld", category: "armor" },
-      { name: "Stone Auto-Compressor", materials: { "Compressed Stone": 4, "Wood Auto-Compressor": 1 }, img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/6/64/Stone_JE5_move.png/revision/latest?cb=20200317041613", world: "overworld", category: "misc" }
+      { name: "Stone Auto-Compressor", materials: { "Compressed Stone": 4, "Wood Auto-Compressor": 1 }, img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/6/64/Stone_JE5_move.png/revision/latest?cb=20200317041613", world: "overworld", category: "misc" },
+      { name: "Coal Pick T.1", materials: { "Compressed Coal": 1, "Stone Pick T.3": 1 }, img: "", world: "overworld", category: "pickaxe" },
+      { name: "Coal Pick T.2", materials: { "Compressed Coal": 2, "Coal Pick T.1": 1 }, img: "", world: "overworld", category: "pickaxe" },
+      { name: "Coal Pick T.3", materials: { "Compressed Coal": 4, "Coal Pick T.2": 1 }, img: "", world: "overworld", category: "pickaxe" },
+      { name: "Coal Sword T.1", materials: { "Compressed Coal": 1, "Stone Sword T.3": 1 }, img: "", world: "overworld", category: "meleeweapon" },
+      { name: "Coal Sword T.2", materials: { "Compressed Coal": 2, "Coal Sword T.1": 1 }, img: "", world: "overworld", category: "meleeweapon" },
+      { name: "Coal Sword T.3", materials: { "Compressed Coal": 4, "Coal Sword T.2": 1 }, img: "", world: "overworld", category: "meleeweapon" },
+      { name: "Coal Armor T.1", materials: { "Compressed Coal": 3, "Stone Armor T.2": 1 }, img: "", world: "overworld", category: "armor" },
+      { name: "Coal Armor T.2", materials: { "Compressed Coal": 5, "Coal Armor T.1": 1 }, img: "", world: "overworld", category: "armor" },
+      { name: "Coal Auto-Compressor", materials: { "Compressed Coal": 8, "Stone Auto-Compressor": 1 }, img: "", world: "overworld", category: "misc" },
+      { name: "Iron Pick T.1", materials: { "Compressed Iron": 4, "Coal Pick T.3": 1 }, img: "", world: "overworld", category: "pickaxe" },
+      { name: "Iron Pick T.2", materials: { "Compressed Iron": 8, "Iron Pick T.1": 1 }, img: "", world: "overworld", category: "pickaxe" },
+      { name: "Iron Pick T.3", materials: { "Compressed Iron": 12, "Iron Pick T.2": 1 }, img: "", world: "overworld", category: "pickaxe" },
+      { name: "Iron Sword T.1", materials: { "Compressed Iron": 4, "Coal Sword T.3": 1 }, img: "", world: "overworld", category: "meleeweapon" },
+      { name: "Iron Sword T.2", materials: { "Compressed Iron": 8, "Iron Sword T.1": 1 }, img: "", world: "overworld", category: "meleeweapon" },
+      { name: "Iron Sword T.3", materials: { "Compressed Iron": 12, "Iron Sword T.2": 1 }, img: "", world: "overworld", category: "meleeweapon" },
+      { name: "Iron Armor T.1", materials: { "Compressed Iron": 6, "Coal Armor T.2": 1 }, img: "", world: "overworld", category: "armor" },
+      { name: "Iron Armor T.2", materials: { "Compressed Iron": 12, "Iron Armor T.1": 1 }, img: "", world: "overworld", category: "armor" },
+      { name: "Iron Auto-Compressor", materials: { "Compressed Iron": 12, "Coal Auto-Compressor": 1 }, img: "", world: "overworld", category: "misc" },
+      { name: "Emerald Pick T.1", materials: { "Compressed Emerald": 12, "Iron Pick T.3": 1 }, img: "", world: "overworld", category: "pickaxe" },
+      { name: "Emerald Pick T.2", materials: { "Compressed Emerald": 24, "Emerald Pick T.1": 1 }, img: "", world: "overworld", category: "pickaxe" },
+      { name: "Emerald Pick T.3", materials: { "Compressed Emerald": 32, "Emerald Pick T.2": 1 }, img: "", world: "overworld", category: "pickaxe" },
+      { name: "Emerald Sword T.1", materials: { "Compressed Emerald": 16, "Iron Sword T.3": 1 }, img: "", world: "overworld", category: "meleeweapon" },
+      { name: "Emerald Sword T.2", materials: { "Compressed Emerald": 24, "Emerald Sword T.1": 1 }, img: "", world: "overworld", category: "meleeweapon" },
+      { name: "Emerald Sword T.3", materials: { "Compressed Emerald": 32, "Emerald Sword T.2": 1 }, img: "", world: "overworld", category: "meleeweapon" },
+      { name: "Emerald Armor T.1", materials: { "Compressed Emerald": 16, "Iron Armor T.2": 1 }, img: "", world: "overworld", category: "armor" },
+      { name: "Emerald Armor T.2", materials: { "Compressed Emerald": 32, "Emerald Armor T.1": 1 }, img: "", world: "overworld", category: "armor" },
+      { name: "Emerald Auto-Compressor", materials: { "Compressed Emerald": 12, "Iron Auto-Compressor": 1 }, img: "", world: "overworld", category: "misc" },
+      { name: "Diamond Pick T.1", materials: { "Compressed Diamond": 32, "Emerald Pick T.3": 1 }, img: "", world: "overworld", category: "pickaxe" },
+      { name: "Diamond Pick T.2", materials: { "Compressed Diamond": 48, "Diamond Pick T.1": 1 }, img: "", world: "overworld", category: "pickaxe" },
+      { name: "Diamond Pick T.3", materials: { "Compressed Diamond": 64, "Diamond Pick T.2": 1 }, img: "", world: "overworld", category: "pickaxe" },
+      { name: "Diamond Sword T.1", materials: { "Compressed Diamond": 32, "Emerald Sword T.3": 1 }, img: "", world: "overworld", category: "meleeweapon" },
+      { name: "Diamond Sword T.2", materials: { "Compressed Diamond": 48, "Diamond Sword T.1": 1 }, img: "", world: "overworld", category: "meleeweapon" },
+      { name: "Diamond Sword T.3", materials: { "Compressed Diamond": 64, "Diamond Sword T.2": 1 }, img: "", world: "overworld", category: "meleeweapon" },
+      { name: "Diamond Armor T.1", materials: { "Compressed Diamond": 24, "Emerald Armor T.2": 1 }, img: "", world: "overworld", category: "armor" },
+      { name: "Diamond Armor T.2", materials: { "Compressed Diamond": 48, "Diamond Armor T.1": 1 }, img: "", world: "overworld", category: "armor" },
+      { name: "Diamond Auto-Compressor", materials: { "Compressed Diamond": 16, "Emerald Auto-Compressor": 1 }, img: "", world: "overworld", category: "misc" },
+      { name: "Obsidian Pick T.1", materials: { "Compressed Obsidian": 16, "Diamond Pick T.3": 1 }, img: "", world: "overworld", category: "pickaxe" },
+      { name: "Obsidian Pick T.2", materials: { "Compressed Obsidian": 32, "Obsidian Pick T.1": 1 }, img: "", world: "overworld", category: "pickaxe" },
+      { name: "Obsidian Pick T.3", materials: { "Compressed Obsidian": 48, "Obsidian Pick T.2": 1 }, img: "", world: "overworld", category: "pickaxe" },
+      { name: "Obsidian Sword T.1", materials: { "Compressed Obsidian": 16, "Diamond Sword T.3": 1 }, img: "", world: "overworld", category: "meleeweapon" },
+      { name: "Obsidian Sword T.2", materials: { "Compressed Obsidian": 32, "Obsidian Sword T.1": 1 }, img: "", world: "overworld", category: "meleeweapon" },
+      { name: "Obsidian Sword T.3", materials: { "Compressed Obsidian": 48, "Obsidian Sword T.2": 1 }, img: "", world: "overworld", category: "meleeweapon" },
+      { name: "Obsidian Armor T.1", materials: { "Compressed Obsidian": 16, "Diamond Armor T.2": 1 }, img: "", world: "overworld", category: "armor" },
+      { name: "Obsidian Armor T.2", materials: { "Compressed Obsidian": 32, "Obsidian Armor T.1": 1 }, img: "", world: "overworld", category: "armor" },
+      { name: "Obsidian Auto-Compressor", materials: { "Compressed Obsidian": 12, "Diamond Auto-Compressor": 1 }, img: "", world: "overworld", category: "misc" },
+      { name: "Shulker", materials: { "ULTRA Compressed Amethyst": 9, "Blood": 1 }, img: "", world: "overworld", category: "misc" },
+      { name: "Amethyst Auto-Compressor", materials: { "ULTRA Compressed Amethyst": 1, "Obsidian Auto-Compressor": 1 }, img: "", world: "overworld", category: "misc" },
+      { name: "Overworld Pick", materials: { "OVERWORLD": 1, "Obsidian Pick T.3": 1 }, img: "", world: "overworld", category: "pickaxe" },
+      { name: "Poisonous Sword T.1", materials: { "Venom": 1, "Obsidian Sword T.3": 1 }, img: "", world: "overworld", category: "meleeweapon" },
+      { name: "Poisonous Sword T.2", materials: { "Venom": 2, "Poisonous Sword T.1": 1 }, img: "", world: "overworld", category: "meleeweapon" },
+      { name: "Poisonous Sword T.3", materials: { "Venom": 3, "Poisonous Sword T.2": 1 }, img: "", world: "overworld", category: "meleeweapon" },
+      { name: "Overworld Sword", materials: { "OVERWORLD": 1, "Poisonous Sword T.3": 1 }, img: "", world: "overworld", category: "meleeweapon" },
+      { name: "Poison Armor T.1", materials: { "Venom": 1, "Obsidian Armor T.2": 1 }, img: "", world: "overworld", category: "armor" },
+      { name: "Poison Armor T.2", materials: { "Venom": 2, "Poison Armor T.1": 1 }, img: "", world: "overworld", category: "armor" },
+      { name: "OVERWORLD Armor", materials: { "OVERWORLD": 1, "Poison Armor T.2": 1 }, img: "", world: "overworld", category: "armor" }
 
 
       //{ name: "Ultimate Wand", materials: { "Crystal Wand": 2, "Blood Harvester": 1 }, img: "", world: "overworld", category: "weapon" }, // item + material cost
@@ -479,6 +533,4 @@
     renderGrid();
   </script>
 </body>
-
 </html>
-
