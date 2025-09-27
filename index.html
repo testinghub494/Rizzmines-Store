@@ -464,6 +464,26 @@
       return [minValue, maxValue];
     }
 
+    function formatTokens(tokenValue) {
+      const rounded = tokenValue < 1 ? 1 : Math.round(tokenValue);
+      const SHULKER = 1728;
+      const STACK = 64;
+
+      const shulkers = Math.floor(rounded / SHULKER);
+      const remainderAfterShulkers = rounded % SHULKER;
+
+      const stacks = Math.floor(remainderAfterShulkers / STACK);
+      const tokens = remainderAfterShulkers % STACK;
+
+      const parts = [];
+      if (shulkers) parts.push(`${shulkers} shulker${shulkers > 1 ? 's' : ''}`);
+      if (stacks) parts.push(`${stacks} stack${stacks > 1 ? 's' : ''}`);
+      if (tokens) parts.push(`${tokens} token${tokens > 1 ? 's' : ''}`);
+      if (!parts.length) parts.push(`0 tokens`);
+  
+      return parts.join(" + ");
+    }
+
     // --- RENDER FUNCTION ---
     function renderGrid() {
       const searchTerm = searchInput.value.toLowerCase();
@@ -502,7 +522,7 @@
           card.innerHTML = `
             <img src="${entry.img || 'https://via.placeholder.com/75'}" alt="${entry.name}">
             <h3>${entry.name}</h3>
-            <p>${min === max ? `${min.toLocaleString()} tokens` : `${min.toLocaleString()} - ${max.toLocaleString()} tokens`}</p>
+            <p>${roundedMin === roundedMax ? formatTokens(roundedMin) : `${formatTokens(roundedMin)} - ${formatTokens(roundedMax)}`}</p>
             <p>${min === max ? `$${minUsd}` : `$${minUsd} - $${maxUsd}`}</p>
           `;
           grid.appendChild(card);
@@ -519,6 +539,7 @@
   </script>
 </body>
 </html>
+
 
 
 
