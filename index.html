@@ -185,6 +185,7 @@
           <option value="abyss">Abyss</option>
           <option value="aether">Aether</option>
           <option value="radiocave">Radioactive Cave</option>
+          <option value="voltaic">Voltaic</option>
           <option value="koth">KOTH</option>
           <option value="bossworld">Bossworld</option>
           <option value="netherbossworld">Nether Bossworld</option>
@@ -303,13 +304,14 @@
       { name: "Gigachad Fist", tokenRange: [64, 128], img: "https://i.imgur.com/qPEshuV.png", world: "overworld", category: "meleeweapon" },
       { name: "Gigachad Potion", materials: { "Compressed Blood": 6, "Compressed Obsidian": 32 }, img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/7/75/Water_Bottle_JE2_BE2.png/revision/latest?cb=20191027055423", world: "overworld", category: "misc" },
       { name: "OverWorld Crate Key", tokenRange: [5, 5], img: "https://i.imgur.com/d4CbxmE.png", world: "overworld", category: "misc" },
-      { name: "Cave Crate Key", materials: { "OverWorld Crate Key": 2 }, img: "https://i.imgur.com/d4CbxmE.png", world: "overworld", category: "misc" },
-      { name: "Frost Crate Key", materials: { "Cave Crate Key": 2 }, img: "https://i.imgur.com/d4CbxmE.png", world: "overworld", category: "misc" },
-      { name: "Nether Crate Key", materials: { "Frost Crate Key": 2 }, img: "https://i.imgur.com/d4CbxmE.png", world: "overworld", category: "misc" },
-      { name: "End Crate Key", materials: { "Nether Crate Key": 2 }, img: "https://i.imgur.com/d4CbxmE.png", world: "overworld", category: "misc" },
-      { name: "Abyss Crate Key", materials: { "End Crate Key": 2 }, img: "https://i.imgur.com/d4CbxmE.png", world: "overworld", category: "misc" },
-      { name: "Aether Crate Key", materials: { "Abyss Crate Key": 2 }, img: "https://i.imgur.com/d4CbxmE.png", world: "overworld", category: "misc" },
-      { name: "Radioactive Crate Key", materials: { "Aether Crate Key": 2 }, img: "https://i.imgur.com/d4CbxmE.png", world: "overworld", category: "misc" },
+      { name: "Cave Crate Key", materials: { "OverWorld Crate Key": 2 }, img: "https://i.imgur.com/d4CbxmE.png", world: "cave", category: "misc" },
+      { name: "Frost Crate Key", materials: { "Cave Crate Key": 2 }, img: "https://i.imgur.com/d4CbxmE.png", world: "beach", category: "misc" },
+      { name: "Nether Crate Key", materials: { "Frost Crate Key": 2 }, img: "https://i.imgur.com/d4CbxmE.png", world: "nether", category: "misc" },
+      { name: "End Crate Key", materials: { "Nether Crate Key": 2 }, img: "https://i.imgur.com/d4CbxmE.png", world: "end", category: "misc" },
+      { name: "Abyss Crate Key", materials: { "End Crate Key": 2 }, img: "https://i.imgur.com/d4CbxmE.png", world: "abyss", category: "misc" },
+      { name: "Aether Crate Key", materials: { "Abyss Crate Key": 2 }, img: "https://i.imgur.com/d4CbxmE.png", world: "aether", category: "misc" },
+      { name: "Radioactive Crate Key", materials: { "Aether Crate Key": 2 }, img: "https://i.imgur.com/d4CbxmE.png", world: "radioactive", category: "misc" },
+      { name: "Voltaic Crate Key", materials: { "Radioactive Crate Key": 2 }, img: "https://i.imgur.com/d4CbxmE.png", world: "voltaic", category: "misc" },
       { name: "Wooden Bow", materials: { "Compressed Oak Wood": 5 }, img: "", world: "overworld", category: "rangedweapon" },
       { name: "Stone Bow", materials: { "Compressed Stone": 6, "Wooden Bow": 1 }, img: "", world: "overworld", category: "rangedweapon" },
       { name: "Coal Bow", materials: { "Compressed Coal": 8, "Stone Bow": 1 }, img: "", world: "overworld", category: "rangedweapon" },
@@ -560,6 +562,7 @@
   </script>
 </body>
 </html>
+
 
 
 
