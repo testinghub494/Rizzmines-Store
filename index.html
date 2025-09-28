@@ -250,13 +250,13 @@
       { name: "Skeleton Token", tokenRange: [16, 16], img: "https://minecraft.wiki/images/Bone_JE3_BE2.png?b405e", world: "netherbossworld", category: "bossdrop" },
       { name: "Ghast Token", tokenRange: [48, 48], img: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/c/c5/Ghast_Tear_JE2_BE2.png/revision/latest?cb=20190501043739", world: "netherbossworld", category: "bossdrop" },
       { name: "Koth Token", tokenRange: [128, 192], img: "https://minecraft.wiki/images/Firework_Star_JE1_BE1.png?f2057", world: "koth", category: "material" },
-      { name: "ULTRA Compressed Deepslate", tokenRange: [0.167, 0.2], img: "", world: "cave", category: "material" },
-      { name: "SUPER Compressed Coal", tokenRange: [0.167, 0.2], img: "", world: "cave", category: "material" },
-      { name: "SUPER Compressed Gold", tokenRange: [0.167, 0.2], img: "", world: "cave", category: "material" },
-      { name: "SUPER Compressed Emerald", tokenRange: [0.167, 0.2], img: "", world: "cave", category: "material" },
-      { name: "ULTRA Compressed Diamond", tokenRange: [0.167, 0.2], img: "", world: "cave", category: "material" },
-      { name: "ULTRA Compressed Sculk", tokenRange: [0.25, 0.33], img: "", world: "cave", category: "material" },
-      { name: "ULTRA Compressed Sculk Catalyst", tokenRange: [0.25, 0.33], img: "", world: "cave", category: "material" },
+      { name: "ULTRA Compressed Deepslate", tokenRange: [0.167, 0.2], img: "https://images.minecraft-heads.com/render3d/head/da/da472117c479b522a9ed2156f2830448.webp", world: "cave", category: "material" },
+      { name: "SUPER Compressed Coal", tokenRange: [0.167, 0.2], img: "https://images.minecraft-heads.com/render3d/head/0f/0f9755d7da97681cdca2d78667277c88.webp", world: "cave", category: "material" },
+      { name: "SUPER Compressed Gold", tokenRange: [0.167, 0.2], img: "https://images.minecraft-heads.com/render3d/head/5e/5ef929c28c121ab99752f4f9563bb784.webp", world: "cave", category: "material" },
+      { name: "SUPER Compressed Emerald", tokenRange: [0.167, 0.2], img: "https://images.minecraft-heads.com/render3d/head/f6/f692ea2d8484eeed8e7b1ae88d67233e.webp", world: "cave", category: "material" },
+      { name: "ULTRA Compressed Diamond", tokenRange: [0.167, 0.2], img: "https://images.minecraft-heads.com/render3d/head/fc/fc073cc0dfe7dbbf0bcf9019480a32a5.webp", world: "cave", category: "material" },
+      { name: "ULTRA Compressed Sculk", tokenRange: [0.25, 0.33], img: "https://images.minecraft-heads.com/render3d/head/37/37a8f8438697148d3c8306352270b1a9.webp", world: "cave", category: "material" },
+      { name: "ULTRA Compressed Sculk Catalyst", tokenRange: [0.25, 0.33], img: "https://images.minecraft-heads.com/render3d/head/5a/5ac03d9efb18ace48636c91e1e778990.webp", world: "cave", category: "material" },
       { name: "Souls", tokenRange: [4, 8], img: "", world: "cave", category: "bossdrop" }
     ];
 
@@ -406,7 +406,14 @@
       { name: "Sculkified Blue Crystalised Gilded Deepslate Coal", materials: { "ULTRA Compressed Sculk": 9, "Blue Crystalised Gilded Deepslate Coal": 1 }, img: "", world: "cave", category: "material" },
       { name: "Hardened Sculkified Blue Crystalised Gilded Deepslate Coal", materials: { "ULTRA Compressed Sculk Catalyst": 8, "Sculkified Blue Crystalised Gilded Deepslate Coal": 1 }, img: "", world: "cave", category: "material" },
       { name: "Cave", materials: { "Souls": 4, "Hardened Sculkified Blue Crystalised Gilded Deepslate Coal": 1 }, img: "https://images.minecraft-heads.com/render3d/head/17/17eb1fb11de45b3b9827a6f77caf0c94.webp", world: "cave", category: "material" },
-      { name: "Warden Summoner", materials: { "Cave": 96 }, img: "https://minecraft.wiki/images/Calibrated_Sculk_Sensor_JE2.gif?cfb26", world: "cave", category: "secret" }
+      { name: "Warden Summoner", materials: { "Cave": 96 }, img: "https://minecraft.wiki/images/Calibrated_Sculk_Sensor_JE2.gif?cfb26", world: "cave", category: "secret" },
+      { name: "Deepslate Talisman", materials: { "ULTRA Compressed Deepslate": 6, "Obsidian Talisman": 1 }, img: "https://images.minecraft-heads.com/render3d/head/da/da472117c479b522a9ed2156f2830448.webp", world: "cave", category: "talisman" },
+      { name: "Hardened Coal Talisman", materials: { "SUPER Compressed Coal": 8, "Deepslate Talisman": 1 }, img: "https://images.minecraft-heads.com/render3d/head/14/14220e2b0b64c5ead37ead9c7ae741e5.webp", world: "cave", category: "talisman" },
+      { name: "Hardened Gold Talisman", materials: { "SUPER Compressed Gold": 12, "Hardened Coal Talisman": 1 }, img: "https://images.minecraft-heads.com/render3d/head/5e/5ef929c28c121ab99752f4f9563bb784.webp", world: "cave", category: "talisman" },
+      { name: "Hardened Emerald Talisman", materials: { "SUPER Compressed Emerald": 18, "Hardened Gold Talisman": 1 }, img: "https://images.minecraft-heads.com/render3d/head/f6/f692ea2d8484eeed8e7b1ae88d67233e.webp", world: "cave", category: "talisman" },
+      { name: "Hardened Diamond Talisman", materials: { "ULTRA Compressed Diamond": 24, "Hardened Emerald Talisman": 1 }, img: "https://images.minecraft-heads.com/render3d/head/fc/fc073cc0dfe7dbbf0bcf9019480a32a5.webp", world: "cave", category: "talisman" },
+      { name: "Sculk Talisman", materials: { "ULTRA Compressed Sculk": 9, "Hardened Diamond Talisman": 1 }, img: "https://images.minecraft-heads.com/render3d/head/37/37a8f8438697148d3c8306352270b1a9.webp", world: "cave", category: "talisman" },
+      { name: "Hardened Sculk Talisman", materials: { "ULTRA Compressed Sculk Catalyst": 9, "Sculk Talisman": 1 }, img: "https://images.minecraft-heads.com/render3d/head/5a/5ac03d9efb18ace48636c91e1e778990.webp", world: "cave", category: "talisman" }
 
 
       //{ name: "Ultimate Wand", materials: { "Crystal Wand": 2, "Blood Harvester": 1 }, img: "", world: "overworld", category: "weapon" }, // item + material cost
@@ -542,6 +549,7 @@
   </script>
 </body>
 </html>
+
 
 
 
