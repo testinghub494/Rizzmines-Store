@@ -514,6 +514,9 @@
             [min, max] = calculateItemValue(entry, materialPrices, items);
           }
 
+          const roundedMin = min < 1 ? 1 : Math.round(min);
+          const roundedMax = max < 1 ? 1 : Math.round(max);
+        
           const minUsd = (min / avgTokenUsdRatio).toFixed(2);
           const maxUsd = (max / avgTokenUsdRatio).toFixed(2);
 
@@ -539,6 +542,7 @@
   </script>
 </body>
 </html>
+
 
 
 
